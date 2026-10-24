@@ -29,7 +29,7 @@ Build mode: learn
   Learner check: Open `http://localhost:3000`, click "Try Sample Project" to verify fields populate without auto-submitting, click "Generate Plan", reload the page, and confirm the active state persists.
   Commit: `feat: implement goal setup, deterministic sample prefill, and persistent planner state`
 
-- [ ] **3. Execution Dashboard, Today Focus, and Task Management**
+- [x] **3. Execution Dashboard, Today Focus, and Task Management**
   Becomes usable: The complete Execution Dashboard. Displays the top metrics bar (countdown, progress, task counts), the Today Focus section with daily capacity meter, the full Day 1 to Day 7 schedule with dependency-ordered task cards, and milestone progress. Checking off tasks updates progress immediately and permanently logs completion.
   Why now: Delivers the primary daily interface where the user tracks work, completes Day 1 tasks, and encounters Day 2 slippage.
   PRD ref: `prd.md > 2. Daily Execution and Task Cards`, `prd.md > Screens and Layout (2. Execution Dashboard)`
