@@ -190,11 +190,16 @@ export function PlannerProvider({ children }: { children: ReactNode }) {
 
   // Rehydrate state on client-side mount
   useEffect(() => {
-    const saved = loadPlannerState();
-    if (saved) {
-      dispatch({ type: 'INIT_SAVED_STATE', payload: saved });
+    try {
+      const saved = loadPlannerState();
+      if (saved) {
+        dispatch({ type: 'INIT_SAVED_STATE', payload: saved });
+      }
+    } catch (err) {
+      console.error('[PlannerContext] Error during state rehydration:', err);
+    } finally {
+      setIsHydrated(true);
     }
-    setIsHydrated(true);
   }, []);
 
   // Sync state to localStorage whenever state changes after initial hydration

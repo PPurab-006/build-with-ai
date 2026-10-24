@@ -8,13 +8,9 @@ import ExecutionDashboard from '../components/ExecutionDashboard';
 function PlannerApp() {
   const { state, isHydrated } = usePlanner();
 
-  // Guard against SSR hydration mismatches
-  if (!isHydrated) {
-    return (
-      <div className="flex-1 flex items-center justify-center min-h-[50vh] text-slate-400 text-sm">
-        Initializing planner...
-      </div>
-    );
+  // If not yet hydrated and no goal exists, render GoalSetup cleanly without trapping the user
+  if (!isHydrated && !state.goal) {
+    return <GoalSetup />;
   }
 
   // If no goal is configured, render Goal Setup
