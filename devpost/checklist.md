@@ -19,7 +19,7 @@ Build mode: learn
   Learner check: Run `npm test` in the terminal and confirm that the deterministic scheduling, cycle detection, and capacity packing tests pass with green checks.
   Commit: `feat: scaffold project and implement pure deterministic scheduling engine with unit tests`
 
-- [ ] **2. Goal Setup & 1-Click Sample Generation with Persistent Reducer State**
+- [x] **2. Goal Setup & 1-Click Sample Generation with Persistent Reducer State**
   Becomes usable: An interactive Goal Setup screen in the browser with full form validation and the "Try Sample Project" button. Clicking "Generate Plan" runs the engine and displays the active plan in state, persisting to `localStorage` across page refreshes.
   Why now: Delivers the entry point of the Core Journey and establishes safe client-side persistence and reducer state early, eliminating any risk of SSR hydration mismatches.
   PRD ref: `prd.md > 1. Goal Creation and Deterministic Sample Loading`, `prd.md > States and Boundaries (First Use State)`

@@ -28,7 +28,7 @@ export interface Goal {
   context?: string;
   constraints?: string;
   isRelativeDays: boolean; // true for 7-day sample project demo
-  createdAt: string;
+  createdAt?: string;
 }
 
 export interface DaySchedule {
@@ -82,12 +82,17 @@ export interface RecoveryOptionPreview {
 }
 
 export interface RevisionRecord {
+  id?: string;
   revisionNumber: number;
   timestamp: string;
   reason: string;
   summary: string;
-  scheduleSnapshot: DaySchedule[];
+  scheduleSnapshot?: DaySchedule[];
+  tasksShiftedCount?: number;
+  tasksDroppedCount?: number;
 }
+
+export type RevisionHistoryEntry = RevisionRecord;
 
 export interface PlannerState {
   goal: Goal | null;
@@ -95,7 +100,11 @@ export interface PlannerState {
   tasks: Task[];
   schedule: DaySchedule[];
   currentDay: number; // 1-indexed active day
+  overallProgressPercent?: number;
+  completedEffortHours?: number;
+  remainingEffortHours?: number;
   revisionHistory: RevisionRecord[];
+  lastReplanTimestamp?: string;
 }
 
 export interface ScheduleResult {
