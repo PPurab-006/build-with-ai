@@ -39,7 +39,7 @@ Build mode: learn
   Learner check: Open the dashboard, complete Day 1's tasks, confirm that progress bars and capacity meters update immediately, reload to confirm persistence, and observe the Day 2 tasks becoming ready.
   Commit: `feat: implement execution dashboard, today focus, and interactive task tracking`
 
-- [ ] **4. Replan Review Modal with Multi-Factor Feasibility, Schedule Diff, Recovery Options, and Revision History**
+- [x] **4. Replan Review Modal with Multi-Factor Feasibility, Schedule Diff, Recovery Options, and Revision History**
   Becomes usable: The defining differentiator of the application. On Day 2, when a task is missed or availability changes, clicking "Replan" opens the Replan Review modal. It displays the exact mathematical shortfall, the before-and-after schedule diff (unchanged, moved, blocked, unscheduled), and 3 verified recovery options (increase daily hours, extend deadline, reduce scope with downstream impact disclosure). Confirming commits the revision and logs revision history; cancelling leaves state untouched.
   Why now: Completes the entire core journey end-to-end, unlocking the exact "Oh, that's cool" demonstration moment required for the hackathon video and judging criteria.
   PRD ref: `prd.md > 4. Replan Review and Recovery Proposals`, `prd.md > 5. Plan History and Reset`, `prd.md > Screens and Layout (3. Replan Review Modal)`
@@ -51,7 +51,7 @@ Build mode: learn
 
 ## Hands-on Checkpoints
 
-- [ ] Early usable behavior explored — Slice 2 (Goal creation and persistent state in browser)
+- [x] Early usable behavior explored — Slice 2 (Goal creation and persistent state in browser)
 - [ ] Final kick-the-tires exploration and feedback completed — Slice 4 (Full end-to-end demo flow)
 
 ## Final Review

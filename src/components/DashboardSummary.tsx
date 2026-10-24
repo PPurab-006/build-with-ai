@@ -6,9 +6,10 @@ import { Target, Calendar, Clock, CheckCircle2, Zap, RotateCcw } from 'lucide-re
 
 interface DashboardSummaryProps {
   onOpenReplan: () => void;
+  onOpenHistory?: () => void;
 }
 
-export default function DashboardSummary({ onOpenReplan }: DashboardSummaryProps) {
+export default function DashboardSummary({ onOpenReplan, onOpenHistory }: DashboardSummaryProps) {
   const { state, dispatch } = usePlanner();
 
   if (!state.goal) return null;
@@ -60,6 +61,17 @@ export default function DashboardSummary({ onOpenReplan }: DashboardSummaryProps
             <Zap className="w-4 h-4 text-indigo-200" />
             Replan
           </button>
+
+          {onOpenHistory && (
+            <button
+              type="button"
+              onClick={onOpenHistory}
+              id="btn-history-header"
+              className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-semibold text-slate-700 bg-white border border-slate-300 hover:bg-slate-50 shadow-2xs transition-colors"
+            >
+              History ({state.revisionHistory.length})
+            </button>
+          )}
 
           <button
             type="button"

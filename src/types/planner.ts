@@ -65,8 +65,9 @@ export interface TaskDiff {
   taskId: string;
   taskTitle: string;
   originalDay?: number;
+  previousDay?: number;
   proposedDay?: number;
-  changeType: 'unchanged' | 'moved' | 'unscheduled' | 'dropped';
+  changeType: 'unchanged' | 'moved' | 'blocked' | 'unscheduled' | 'dropped';
   reason?: string;
 }
 
