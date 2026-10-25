@@ -13,6 +13,7 @@ out/
 build/
 coverage/
 artifacts/
+.vercel
 
 # Misc
 .DS_Store
