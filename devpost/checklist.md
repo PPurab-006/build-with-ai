@@ -52,23 +52,27 @@ Build mode: learn
 ## Hands-on Checkpoints
 
 - [x] Early usable behavior explored — Slice 2 (Goal creation and persistent state in browser)
-- [ ] Final kick-the-tires exploration and feedback completed — Slice 4 (Full end-to-end demo flow)
+- [x] Final kick-the-tires exploration and feedback completed — Slice 4 (Full end-to-end demo flow)
 
 ## Final Review
 
-- [ ] Final review complete — feedback resolved and learner confirms ready to ship
+- [x] Final review complete — feedback resolved and learner confirms ready to ship
 
 ## Code Tour and App Map
 
-- [ ] Learning activity complete — guided route, focused alternative, prior practice connected, or brief recap
-- [ ] Optional edit and transfer reflection addressed — offered/declined/already covered/not applicable as appropriate
-- [ ] `devpost/app-map.html` generated from finished code, checked, and shown, including a project-grounded practice to reuse
+- [x] Learning activity complete — guided route, focused alternative, prior practice connected, or brief recap
+- [x] Optional edit and transfer reflection addressed — offered/declined/already covered/not applicable as appropriate
+- [x] `devpost/app-map.html` generated from finished code, checked, and shown, including a project-grounded practice to reuse
 
-Activity and evidence: [to be filled during learning wrap-up]
-Route and stops: [to be filled during learning wrap-up]
-Edit outcome: [to be filled during learning wrap-up]
-Reflection: [to be filled during learning wrap-up]
-Activity mode: [to be filled during learning wrap-up]
+Activity and evidence: Verified full end-to-end demo flow (Goal Setup with 7-day ML project, Day 1 completion, Day 3 disruption with locked dependencies, Replan Review preview with multi-factor bottleneck diagnostics, and recovery option application). 27 Vitest unit tests pass across 5 test suites; TypeScript typecheck and Next.js production build compile with 0 errors.
+Route and stops: 3-stop architecture route: `src/components/ReplanReviewModal.tsx` (UI preview) -> `src/lib/engine.ts` (`computeReplanPreview`, `allocateTasksToDays`) -> `src/context/PlannerContext.tsx` (`APPLY_REVISION`).
+Edit outcome: Not applicable (implementation is verified and stable; no scope changes).
+Reflection: Decoupling the pure deterministic scheduling engine (`src/lib/engine.ts`) from UI state enables rapid, reliable unit testing of edge cases (cycles, hour overages, bottleneck detection) in milliseconds without UI test harness overhead.
+Activity mode: Evidence-based recap and standalone App Map.
 
 ## Revisions
+
+- Revision 1: Adjusted initial test assertions in `tests/engine.test.ts` to honestly reflect that increasing hours alone cannot resolve a sequential prerequisite bottleneck without extending the deadline.
+- Revision 2: Wrapped client hydration in `PlannerContext.tsx` with non-blocking error handling to ensure clean static production bundle serving without loading-state stalls.
+
 

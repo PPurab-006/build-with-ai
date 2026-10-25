@@ -2,10 +2,270 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>App Map</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adaptive Execution Planner — App Map & Architecture Tour</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --border: #e2e8f0;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --primary: #2563eb;
+      --primary-light: #eff6ff;
+      --success: #16a34a;
+      --amber: #d97706;
+      --code-bg: #f1f5f9;
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 2.5rem 1.5rem;
+    }
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2.5rem;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    }
+    header {
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    h1 {
+      font-size: 1.85rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+    .badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.2rem 0.6rem;
+      background: var(--primary-light);
+      color: var(--primary);
+      border-radius: 9999px;
+      margin-bottom: 0.75rem;
+    }
+    p.lead {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+    }
+    section {
+      margin-bottom: 2.5rem;
+    }
+    h2 {
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 1rem;
+      padding-bottom: 0.35rem;
+      border-bottom: 1px solid var(--border);
+    }
+    h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text);
+      margin: 1.25rem 0 0.5rem 0;
+    }
+    p { margin-bottom: 1rem; }
+    ul, ol { margin-bottom: 1rem; padding-left: 1.5rem; }
+    li { margin-bottom: 0.5rem; }
+    code {
+      font-family: var(--font-mono);
+      font-size: 0.88em;
+      background-color: var(--code-bg);
+      padding: 0.15rem 0.35rem;
+      border-radius: 4px;
+      color: #0f172a;
+    }
+    pre {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      background-color: var(--code-bg);
+      padding: 1rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      margin-bottom: 1rem;
+      border: 1px solid var(--border);
+    }
+    .diagram-card {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .step-card {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+      background: #ffffff;
+      border-left: 4px solid var(--primary);
+    }
+    .step-card h4 {
+      font-size: 1.05rem;
+      margin-bottom: 0.4rem;
+      color: var(--primary);
+    }
+    .tip-box {
+      background-color: var(--primary-light);
+      border-left: 4px solid var(--primary);
+      padding: 1rem 1.25rem;
+      border-radius: 6px;
+      margin: 1.25rem 0;
+    }
+    .meta-footer {
+      border-top: 1px solid var(--border);
+      padding-top: 1.5rem;
+      margin-top: 2rem;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+  </style>
 </head>
 <body>
-  <h1>App Map & Code Tour</h1>
-  <p>The code tour was completed.</p>
+  <main class="container">
+    <header>
+      <span class="badge">Architecture Tour & App Map</span>
+      <h1>Adaptive Execution Planner</h1>
+      <p class="lead">A structural guide mapping user actions to code architecture, data flow, and testing boundaries.</p>
+    </header>
+
+    <section>
+      <h2>Application Overview</h2>
+      <p>Adaptive Execution Planner is a goal-to-execution planning tool. It is cleanly separated into four architectural tiers:</p>
+      <ul>
+        <li><strong>UI & Components (<code>src/components/</code>):</strong> Lightweight React components handling presentation, user events, and local visual states.</li>
+        <li><strong>Application State & Reducer (<code>src/context/PlannerContext.tsx</code>):</strong> React Context managing state transitions, progress tracking, and immutable revision logging.</li>
+        <li><strong>Persistence Layer (<code>src/lib/storage.ts</code>):</strong> SSR-safe, schema-validated browser storage using <code>localStorage</code>.</li>
+        <li><strong>Pure Scheduling Engine (<code>src/lib/engine.ts</code>):</strong> Standalone, zero-dependency mathematical engine implementing topological sorting, capacity allocation, multi-factor feasibility detection, and recovery proposal generation.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Data Flow: The Adaptive Replan Action</h2>
+      <p>The primary architectural innovation is the non-mutating Replan Review flow. When a user requests a schedule recalculation, the application computes an in-memory preview before committing any changes:</p>
+      
+      <div class="diagram-card">
+        <svg viewBox="0 0 740 220" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" style="font-family: -apple-system, sans-serif; font-size: 13px;">
+          <!-- User Action -->
+          <rect x="10" y="80" width="140" height="60" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+          <text x="80" y="105" text-anchor="middle" font-weight="bold" fill="#1e40af">User Action</text>
+          <text x="80" y="125" text-anchor="middle" fill="#3b82f6">Clicks "Replan"</text>
+
+          <!-- Arrow 1 -->
+          <path d="M 150 110 L 190 110" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+
+          <!-- UI Modal -->
+          <rect x="195" y="80" width="165" height="60" rx="8" fill="#f8fafc" stroke="#64748b" stroke-width="2"/>
+          <text x="277" y="105" text-anchor="middle" font-weight="bold" fill="#0f172a">ReplanReviewModal</text>
+          <text x="277" y="125" text-anchor="middle" fill="#64748b">Opens in-memory preview</text>
+
+          <!-- Arrow 2 -->
+          <path d="M 360 110 L 400 110" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+
+          <!-- Pure Engine -->
+          <rect x="405" y="60" width="160" height="100" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+          <text x="485" y="85" text-anchor="middle" font-weight="bold" fill="#166534">Pure Engine</text>
+          <text x="485" y="105" text-anchor="middle" font-size="11" fill="#15803d">computeReplanPreview()</text>
+          <text x="485" y="122" text-anchor="middle" font-size="11" fill="#15803d">evaluateFeasibility()</text>
+          <text x="485" y="139" text-anchor="middle" font-size="11" fill="#15803d">evaluateRecoveryOptions()</text>
+
+          <!-- Arrow 3 -->
+          <path d="M 565 110 L 605 110" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)"/>
+
+          <!-- Reducer / State -->
+          <rect x="610" y="70" width="120" height="80" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+          <text x="670" y="98" text-anchor="middle" font-weight="bold" fill="#92400e">State Commit</text>
+          <text x="670" y="118" text-anchor="middle" font-size="11" fill="#b45309">APPLY_REVISION</text>
+          <text x="670" y="134" text-anchor="middle" font-size="10" fill="#78350f">(Only on Confirm)</text>
+
+          <!-- Arrow marker -->
+          <defs>
+            <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 0 L 10 5 L 0 10 z" fill="#94a3b8" />
+            </marker>
+          </defs>
+        </svg>
+      </div>
+    </section>
+
+    <section>
+      <h2>Architecture Reference Route</h2>
+      <p>Follow this 3-stop route to understand how the codebase executes and preserves plan integrity:</p>
+
+      <div class="step-card">
+        <h4>Stop 1: UI Interaction & Preview Boundary</h4>
+        <p><strong>Location:</strong> <code>src/components/ReplanReviewModal.tsx</code></p>
+        <p>This component renders the interactive Replan Review dialog. Notice that changing recovery options calls <code>computeReplanPreview()</code> and recalculates local state in-memory. Clicking "Cancel" simply closes the modal with zero mutations to the active plan.</p>
+      </div>
+
+      <div class="step-card">
+        <h4>Stop 2: Deterministic Scheduling & Diagnostic Math</h4>
+        <p><strong>Location:</strong> <code>src/lib/engine.ts</code> &rarr; <code>computeReplanPreview()</code>, <code>allocateTasksToDays()</code></p>
+        <p>The pure engine takes the goal, incomplete tasks, and capacity. It evaluates prerequisite DAG ordering, performs daily capacity bin-packing, calculates multi-factor feasibility (flagging whether an issue is an aggregate hour deficit or a sequential bottleneck), and computes recovery options. It contains 0 side effects and 0 external dependencies.</p>
+      </div>
+
+      <div class="step-card">
+        <h4>Stop 3: State Commit & Audit Persistence</h4>
+        <p><strong>Location:</strong> <code>src/context/PlannerContext.tsx</code> &rarr; <code>plannerReducer</code> (<code>APPLY_REVISION</code>)</p>
+        <p>When the user clicks "Apply Revised Plan", this reducer action applies the revision, increments the plan version, records a new entry in <code>revisionHistory</code>, and immediately persists the updated state to <code>localStorage</code> via <code>src/lib/storage.ts</code>.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>"To Change This, Start Here"</h2>
+      <ul>
+        <li><strong>Add a new recovery proposal algorithm:</strong> Modify <code>evaluateRecoveryOptions()</code> in <code>src/lib/engine.ts</code>.</li>
+        <li><strong>Modify task completion or blocked rules:</strong> Inspect <code>src/components/TaskCard.tsx</code> and <code>TOGGLE_TASK</code> in <code>src/context/PlannerContext.tsx</code>.</li>
+        <li><strong>Customize the sample demonstration project:</strong> Edit <code>SAMPLE_GOAL</code> and <code>SAMPLE_TASKS</code> in <code>src/lib/sampleData.ts</code>.</li>
+        <li><strong>Adjust storage keys or schema validation:</strong> Inspect <code>validateStoredState()</code> in <code>src/lib/storage.ts</code>.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>A Practice to Reuse</h2>
+      <div class="tip-box">
+        <p><strong>Separate Algorithmic Math from Framework State:</strong></p>
+        <p>By extracting the entire scheduling, topological sort, and feasibility engine into a standalone, pure TypeScript module (<code>src/lib/engine.ts</code>), the business logic became trivial to test. All 12 engine invariant tests in <code>tests/engine.test.ts</code> run in less than 50ms without mocking React, the DOM, or browser storage.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Local Execution</h2>
+      <pre><code># Start development server
+npm run dev
+
+# Run Vitest unit tests
+npm test
+
+# Run TypeScript type check
+npx tsc --noEmit
+
+# Compile production build
+npm run build</code></pre>
+    </section>
+
+    <footer class="meta-footer">
+      <span>Adaptive Execution Planner — Build With AI: Basics</span>
+      <span>Artifact: devpost/app-map.html</span>
+    </footer>
+  </main>
 </body>
 </html>
