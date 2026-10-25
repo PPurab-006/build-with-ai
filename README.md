@@ -31,8 +31,8 @@ Unlike optimistic chatbots or rigid checklists, Adaptive Execution Planner coupl
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/PPurab-006/build-with-ai-basics.git
-   cd build-with-ai-basics
+   git clone https://github.com/PPurab-006/build-with-ai.git
+   cd build-with-ai
    ```
 
 2. Install dependencies:
