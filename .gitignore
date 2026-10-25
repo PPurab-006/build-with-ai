@@ -12,6 +12,7 @@ node_modules/
 out/
 build/
 coverage/
+artifacts/
 
 # Misc
 .DS_Store
